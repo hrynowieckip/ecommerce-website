@@ -11,7 +11,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@EqualsAndHashCode(of = "email")
+@EqualsAndHashCode(of = "username")
 @ToString(exclude = "password")
 public class User {
     @Id
@@ -19,15 +19,15 @@ public class User {
     private Long id;
 
     @Column(nullable = false, unique = true)
-    private String email;
+    private String username;
 
     private String password;
     private Boolean active = Boolean.FALSE;
 
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "users_roles",
-            joinColumns = @JoinColumn(name = "email", referencedColumnName = "email"),
-            indexes = @Index(name = "users_roles_email_idx", columnList = "email"))
+            joinColumns = @JoinColumn(name = "username", referencedColumnName = "username"),
+            indexes = @Index(name = "users_roles_username_idx", columnList = "username"))
     @Column(name = "role")
     private Set<String> roles;
 }
