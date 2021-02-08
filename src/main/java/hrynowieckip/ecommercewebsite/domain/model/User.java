@@ -3,6 +3,7 @@ package hrynowieckip.ecommercewebsite.domain.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Set;
 
 @Entity
@@ -13,7 +14,7 @@ import java.util.Set;
 @Builder
 @EqualsAndHashCode(of = "username")
 @ToString(exclude = "password")
-public class User {
+public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
