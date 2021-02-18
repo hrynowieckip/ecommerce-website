@@ -6,6 +6,7 @@ import hrynowieckip.ecommercewebsite.domain.model.User;
 import hrynowieckip.ecommercewebsite.domain.model.UserDetails;
 import hrynowieckip.ecommercewebsite.domain.repository.UserRepository;
 import hrynowieckip.ecommercewebsite.exception.UserAlreadyExistsException;
+import hrynowieckip.ecommercewebsite.web.command.EditUserCommand;
 import hrynowieckip.ecommercewebsite.web.command.RegisterUserCommand;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -53,5 +54,13 @@ public class UserService {
         UserSummary userSummary = userConverter.toUserSummary(user);
         log.debug("Summary of user data {}", userSummary);
         return userSummary;
+    }
+    public String edit(EditUserCommand editUserCommand) {
+        log.debug("Getting current user data");
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        User userToEdit = userRepository.getByUsername(username);
+        log.debug("User data to conversion: {}", editUserCommand);
+        User user = userConverter.from(editUserCommand, userToEdit);
+        return user.getUsername();
     }
 }

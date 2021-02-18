@@ -3,6 +3,7 @@ package hrynowieckip.ecommercewebsite.converter;
 import hrynowieckip.ecommercewebsite.data.user.UserSummary;
 import hrynowieckip.ecommercewebsite.domain.model.User;
 import hrynowieckip.ecommercewebsite.domain.model.UserDetails;
+import hrynowieckip.ecommercewebsite.web.command.EditUserCommand;
 import hrynowieckip.ecommercewebsite.web.command.RegisterUserCommand;
 import org.springframework.stereotype.Component;
 
@@ -27,5 +28,16 @@ public class UserConverter {
                 .city(userDetails.getCity())
                 .phoneNumber(userDetails.getPhoneNumber())
                 .build();
+    }
+
+    public User from(EditUserCommand editUserCommand, User userToEdit) {
+        UserDetails userDetails = userToEdit.getUserDetails();
+        userDetails.setFirstName(editUserCommand.getFirstName());
+        userDetails.setLastName(editUserCommand.getLastName());
+        userDetails.setAddress(editUserCommand.getAddress());
+        userDetails.setZipCode(editUserCommand.getZipCode());
+        userDetails.setCity(editUserCommand.getCity());
+        userDetails.setPhoneNumber(editUserCommand.getPhoneNumber());
+        return userToEdit;
     }
 }

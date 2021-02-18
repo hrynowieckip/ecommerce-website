@@ -5,37 +5,38 @@
     <title>Your profile</title>
 </head>
 <body>
-<h1>Your profile<span th:text="${userSummary.username}"></span></h1>
+<h1>Your profile: <span th:text="${userSummary.username}"></span></h1>
 
 <section>
-    <form action="/edit-profile" method="post">
+    <form th:action="@{/profile/edit}" th:method="post" th:object="${editUserCommand}">
         <div>
             <label>First name:</label>
-            <input type="text" name="firstName"/>
+            <input type="text" th:placeholder="*{firstName}" name="firstName"/>
         </div>
         <div>
             <label>Last name:</label>
-            <input type="text" name="lastName"/>
+            <input type="text" th:placeholder="*{lastName}" name="lastName"/>
         </div>
         <div>
             <label>Address:</label>
-            <input type="text" name="address"/>
+            <input type="text" th:placeholder="*{address}" name="address"/>
         </div>
         <div>
             <label>Zip code:</label>
-            <input type="text" name="zipCode"/>
+            <input type="text" th:placeholder="*{zipCode}" name="zipCode"/>
         </div>
         <div>
             <label>City:</label>
-            <input type="text" name="city"/>
+            <input type="text" th:placeholder="*{city}" name="city"/>
         </div>
         <div>
             <label>Phone number:</label>
-            <input type="text" name="phoneNumber"/>
+            <input type="text" th:placeholder="*{phoneNumber}" name="phoneNumber"/>
         </div>
 
         <div>
             <button type="submit">Save</button>
+            <div th:if="${#fields.hasGlobalErrors()}" th:value="${#fields.globalErrors()}"></div>
         </div>
     </form>
 </section>
