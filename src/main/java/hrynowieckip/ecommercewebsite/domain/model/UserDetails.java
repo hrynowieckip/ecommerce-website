@@ -13,17 +13,11 @@ public class UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(nullable = false)
     private String firstName;
-    @Column(nullable = false)
     private String lastName;
-    @Column(nullable = false)
     private String address;
-    @Column(nullable = false)
     private String zipCode;
-    @Column(nullable = false)
     private String city;
-    @Column(nullable = false)
     private String phoneNumber;
 
     @OneToOne

@@ -5,7 +5,7 @@
     <title>Your profile</title>
 </head>
 <body>
-<h1>Your profile</h1>
+<h1>Your profile<span th:text="${userSummary.username}"></span></h1>
 
 <section>
     <form action="/edit-profile" method="post">
