@@ -13,7 +13,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Builder
 @EqualsAndHashCode(of = "username")
-@ToString(exclude = "password")
+@ToString(exclude = {"password", "userDetails"})
 public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,4 +31,7 @@ public class User implements Serializable {
             indexes = @Index(name = "users_roles_username_idx", columnList = "username"))
     @Column(name = "role")
     private Set<String> roles;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private UserDetails userDetails;
 }
