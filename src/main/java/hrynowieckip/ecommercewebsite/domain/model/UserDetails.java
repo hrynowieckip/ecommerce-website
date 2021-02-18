@@ -27,7 +27,8 @@ public class UserDetails {
     private String phoneNumber;
 
     @OneToOne
+    @JoinColumn(name = "user_id")
     private User user;
-    @Column(insertable = false,updatable = false)
+    @Column(insertable = false,updatable = false, name = "user_id")
     private Long userId;
 }
