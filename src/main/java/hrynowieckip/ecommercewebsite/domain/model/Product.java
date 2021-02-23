@@ -12,6 +12,7 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @Builder
 @EqualsAndHashCode(of = "name")
+@ToString(exclude = "category")
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
