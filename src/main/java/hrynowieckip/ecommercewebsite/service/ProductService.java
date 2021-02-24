@@ -29,7 +29,7 @@ public class ProductService {
 
     public List<ProductSummary> getAllProductsSummary() {
         log.debug("Getting all products");
-        List<Product> allProducts = productRepository.getAll();
+        List<Product> allProducts = productRepository.getAllBy();
         log.debug("Products to convert: {}", allProducts);
         return allProducts.stream()
                 .map(productConverter::toProductSummary)

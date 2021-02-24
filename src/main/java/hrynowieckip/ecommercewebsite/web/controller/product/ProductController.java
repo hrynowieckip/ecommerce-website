@@ -2,6 +2,7 @@ package hrynowieckip.ecommercewebsite.web.controller.product;
 
 import hrynowieckip.ecommercewebsite.data.product.ProductSummary;
 import hrynowieckip.ecommercewebsite.exception.ProductNameAlreadyExists;
+import hrynowieckip.ecommercewebsite.service.CategoryService;
 import hrynowieckip.ecommercewebsite.service.ProductService;
 import hrynowieckip.ecommercewebsite.web.command.AddProductCommand;
 import lombok.RequiredArgsConstructor;
@@ -22,22 +23,24 @@ import java.util.List;
 @RequestMapping("/product")
 public class ProductController {
     private final ProductService productService;
+    private final CategoryService categoryService;
 
     @GetMapping
     public String getProducts(Model model) {
         List<ProductSummary> allProducts = productService.getAllProductsSummary();
         model.addAttribute("allProducts", allProducts);
         model.addAttribute(new AddProductCommand());
-        return "";
+        model.addAttribute("allCategories", categoryService.getAllCategoriesSummary());
+        return "product/form";
     }
 
-    @PostMapping
+    @PostMapping("/add")
     public String addProduct(@Valid AddProductCommand addProductCommand, BindingResult bindingResult) {
         log.debug("Product data to add: {}", addProductCommand);
 
         if (bindingResult.hasErrors()) {
             log.debug("Incorrect data : {}", bindingResult.getAllErrors());
-            return "";
+            return "product/form";
         }
         try {
             Long id = productService.addProduct(addProductCommand);
@@ -46,10 +49,10 @@ public class ProductController {
 
         } catch (ProductNameAlreadyExists pnae) {
             bindingResult.rejectValue(null, null, "Product with that name already exists");
-            return "";
+            return "product/form";
         } catch (RuntimeException exception) {
             bindingResult.rejectValue(null, null, "Problem with adding product");
-            return "";
+            return "product/form";
         }
 
     }

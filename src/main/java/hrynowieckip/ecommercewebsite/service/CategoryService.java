@@ -24,7 +24,7 @@ public class CategoryService {
 
     public List<CategorySummary> getAllCategoriesSummary() {
         log.debug("Getting all categories");
-        List<Category> allCategories = categoryRepository.getAll();
+        List<Category> allCategories = categoryRepository.getAllBy();
         log.debug("Categories to convert: {}", allCategories);
         return allCategories.stream()
                 .map(categoryConverter::toCategorySummary)

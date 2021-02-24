@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add category</title>
+</head>
+<body>
+
+<section>
+    <div>
+        <label>Category:</label>
+        <select required name="category">
+            <option th:each="categoryElement:${allCategories}"  th:value="${categoryElement.name}"   th:text="${categoryElement.name}"></option>
+        </select>
+    </div>
+</section>
+
+<section>
+    <form th:action="@{/category/add}" th:method="post" th:object="${addCategoryCommand}">
+        <div>
+            <label>Category:</label>
+            <input type="text" th:field="*{name}"/>
+        </div>
+        <div>
+            <button type="submit">Add</button>
+            <div th:if="${#fields.hasGlobalErrors()}" th:value="${#fields.globalErrors()}"></div>
+        </div>
+    </form>
+</section>
+</body>
+</html>

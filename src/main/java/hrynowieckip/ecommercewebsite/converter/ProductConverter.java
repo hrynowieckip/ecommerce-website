@@ -3,7 +3,9 @@ package hrynowieckip.ecommercewebsite.converter;
 import hrynowieckip.ecommercewebsite.data.product.ProductSummary;
 import hrynowieckip.ecommercewebsite.domain.model.Product;
 import hrynowieckip.ecommercewebsite.web.command.AddProductCommand;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ProductConverter {
     public Product from(AddProductCommand addProductCommand) {
         return Product.builder()

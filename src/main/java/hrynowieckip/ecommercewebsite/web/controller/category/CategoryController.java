@@ -28,15 +28,15 @@ public class CategoryController {
         List<CategorySummary> categorySummaryList = categoryService.getAllCategoriesSummary();
         model.addAttribute("allCategories", categorySummaryList);
         model.addAttribute(new AddCategoryCommand());
-        return "";
+        return "category/form";
     }
 
-    @PostMapping
+    @PostMapping("/add")
     private String addCategory(@Valid AddCategoryCommand addCategoryCommand, BindingResult bindingResult) {
         log.debug("Category data to add: {}", addCategoryCommand);
         if (bindingResult.hasErrors()) {
             log.debug("Incorrect data: {}", bindingResult.getAllErrors());
-            return "";
+            return "category/form";
         }
         try {
             Long id = categoryService.addCategory(addCategoryCommand);
@@ -44,10 +44,10 @@ public class CategoryController {
             return "redirect:/category";
         } catch (CategoryNameAlreadyExistsException cnaee) {
             bindingResult.rejectValue("name", null, "This category name already exists");
-            return "";
+            return "category/form";
         } catch (RuntimeException exception) {
             bindingResult.rejectValue(null, null, "Problem with adding category");
-            return "";
+            return "category/form";
         }
     }
 }
