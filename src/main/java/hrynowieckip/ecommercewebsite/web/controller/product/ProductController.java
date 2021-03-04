@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -24,6 +25,14 @@ import java.util.List;
 public class ProductController {
     private final ProductService productService;
     private final CategoryService categoryService;
+
+    @GetMapping("/{name}")
+    public String getProductPage(@PathVariable("name") String name, Model model){
+        model.addAttribute("allCategories", categoryService.getAllCategoriesSummary());
+        ProductSummary productSummary = productService.getProductSummaryByName(name);
+        model.addAttribute("product", productSummary);
+        return "product/product-page";
+    }
 
     @GetMapping
     public String getProducts(Model model) {

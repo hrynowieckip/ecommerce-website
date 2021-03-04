@@ -58,4 +58,11 @@ public class ProductService {
     }
 
 
+    public ProductSummary getProductSummaryByName(String name) {
+        log.debug("Getting product by name: {}", name);
+        Product product = productRepository.getByName(name);
+        log.debug("Convert product to summary");
+        ProductSummary productSummary = productConverter.toProductSummary(product);
+        return productSummary;
+    }
 }
