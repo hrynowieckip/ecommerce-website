@@ -16,9 +16,11 @@ public class ProductConverter {
     }
     public ProductSummary toProductSummary(Product product){
         return ProductSummary.builder()
+                .id(product.getId())
                 .name(product.getName())
                 .description(product.getDescription())
                 .price(product.getPrice())
+                .photos(product.getPhotos())
                 .build();
     }
 }

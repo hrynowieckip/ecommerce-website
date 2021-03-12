@@ -10,10 +10,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -44,7 +42,7 @@ public class ProductController {
     }
 
     @PostMapping("/add")
-    public String addProduct(@Valid AddProductCommand addProductCommand, BindingResult bindingResult) {
+    public String addProduct(@Valid AddProductCommand addProductCommand, @RequestParam("image") MultipartFile[] multipartProductImage, BindingResult bindingResult) {
         log.debug("Product data to add: {}", addProductCommand);
 
         if (bindingResult.hasErrors()) {
@@ -52,9 +50,9 @@ public class ProductController {
             return "product/form";
         }
         try {
-            Long id = productService.addProduct(addProductCommand);
+            Long id = productService.addProduct(addProductCommand, multipartProductImage);
             log.debug("Product added, id = {}", id);
-            return "redirect:/product";
+            return "redirect:/";
 
         } catch (ProductNameAlreadyExists pnae) {
             bindingResult.rejectValue(null, null, "Product with that name already exists");

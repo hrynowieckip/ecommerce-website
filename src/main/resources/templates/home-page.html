@@ -28,11 +28,10 @@
         <div class="col-md-3 col-sm-6" th:each="product:${allProducts}">
             <div class="product-grid2">
                 <div class="product-image2">
-
                     <a th:href="@{/product/{name}(name = ${product.name})}">
+                        <img th:each="photo,photoStats:${product.photos}" th:if="${photoStats.index == 0}" class="pic-1" style="width:306px;height:408px;" th:src="@{'/product-images/' + ${product.id} + '/' + ${photo.getPath()}}" />
+                        <img th:each="photo,photoStats:${product.photos}" th:if="${photoStats.index == 1}" class="pic-2" style="width:306px;height:408px;" th:src="@{'/product-images/' + ${product.id} + '/' + ${photo.getPath()}}" />
 
-                         <img class="pic-1" src="http://bestjquery.com/tutorial/product-grid/demo3/images/img-1.jpeg">
-                         <img class="pic-2" src="http://bestjquery.com/tutorial/product-grid/demo3/images/img-2.jpeg">
                     </a>
                     <ul class="social">
                         <li><a href="#" data-tip="Quick View"><i class="fa fa-eye"></i></a></li>
@@ -51,9 +50,6 @@
 
     </div>
 </div>
-
-
-
 <footer class="footer" th:insert="elements/footer.html :: footer"></footer>
 </body>
 </html>

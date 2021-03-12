@@ -1,6 +1,7 @@
 package hrynowieckip.ecommercewebsite.web.controller;
 
 
+import hrynowieckip.ecommercewebsite.domain.repository.ProductRepository;
 import hrynowieckip.ecommercewebsite.service.CategoryService;
 import hrynowieckip.ecommercewebsite.service.ProductService;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class HomePageController {
     private final CategoryService categoryService;
     private final ProductService productService;
+    private final ProductRepository productRepository;
     @GetMapping
     public String getTest(Model model){
         model.addAttribute("allCategories", categoryService.getAllCategoriesSummary());
