@@ -41,18 +41,16 @@
                         <div class="col-lg-13">
                             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                                 <ol class="carousel-indicators">
-                                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                                    <li th:each="photo,photoStats:${product.photos}" th:if="${photoStats.index == 0}" data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                                    <li th:each="photo,photoStats:${product.photos}" th:if="${photoStats.index > 0}" data-target="#carouselExampleIndicators" th:data-slide-to="${photoStats.index}"></li>
                                 </ol>
                                 <div class="carousel-inner">
                                     <div class="carousel-item active">
-                                        <img class="d-block w-100"
-                                             src="http://bestjquery.com/tutorial/product-grid/demo3/images/img-1.jpeg"
+                                        <img class="d-block w-100" style="width:366.5px;height:488.66px;" th:each="photo,photoStats:${product.photos}" th:if="${photoStats.index == 0}" th:src="@{'/product-images/' + ${product.id} + '/' + ${photo.getPath()}}"
                                              alt="First slide">
                                     </div>
-                                    <div class="carousel-item">
-                                        <img class="d-block w-100"
-                                             src="http://bestjquery.com/tutorial/product-grid/demo3/images/img-2.jpeg"
+                                    <div class="carousel-item" th:each="photo,photoStats:${product.photos}" th:if="${photoStats.index > 0}">
+                                        <img class="d-block w-100" style="width:366.5px;height:488.66px;" th:src="@{'/product-images/' + ${product.id} + '/' + ${photo.getPath()}}"
                                              alt="Second slide">
                                     </div>
                                 </div>
