@@ -1,4 +1,4 @@
-package hrynowieckip.ecommercewebsite.web.controller;
+package hrynowieckip.ecommercewebsite.web.controller.user;
 
 import hrynowieckip.ecommercewebsite.data.user.UserSummary;
 import hrynowieckip.ecommercewebsite.service.UserService;
@@ -52,6 +52,6 @@ public class UserProfileController {
             bindingResult.rejectValue(null, null, "Something went wrong");
             return "/profile/edit";
         }
-        return "redirect:/profile";
+        return "redirect:/";
     }
 }
