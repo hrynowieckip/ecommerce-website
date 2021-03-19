@@ -4,6 +4,7 @@ import hrynowieckip.ecommercewebsite.data.product.ProductSummary;
 import hrynowieckip.ecommercewebsite.exception.ProductNameAlreadyExists;
 import hrynowieckip.ecommercewebsite.service.CategoryService;
 import hrynowieckip.ecommercewebsite.service.ProductService;
+import hrynowieckip.ecommercewebsite.web.command.AddCommentCommand;
 import hrynowieckip.ecommercewebsite.web.command.AddProductCommand;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,10 +26,11 @@ public class ProductController {
     private final CategoryService categoryService;
 
     @GetMapping("/{name}")
-    public String getProductPage(@PathVariable("name") String name, Model model){
+    public String getProductPage(@PathVariable("name") String name, Model model) {
         model.addAttribute("allCategories", categoryService.getAllCategoriesSummary());
         ProductSummary productSummary = productService.getProductSummaryByName(name);
         model.addAttribute("product", productSummary);
+        model.addAttribute(new AddCommentCommand());
         return "product/product-page";
     }
 
@@ -62,5 +64,13 @@ public class ProductController {
             return "product/form";
         }
 
+    }
+
+    @PostMapping("/comment/add")
+    public String postComment(AddCommentCommand addCommentCommand) {
+        log.debug("Comment to add: {}", addCommentCommand);
+        Long id = productService.addComment(addCommentCommand);
+        log.debug("Comment saved, id: {}", id);
+        return "redirect:/";
     }
 }

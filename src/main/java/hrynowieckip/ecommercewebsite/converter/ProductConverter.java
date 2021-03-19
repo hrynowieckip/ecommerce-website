@@ -21,6 +21,7 @@ public class ProductConverter {
                 .description(product.getDescription())
                 .price(product.getPrice())
                 .photos(product.getPhotos())
+                .comments(product.getComments())
                 .build();
     }
 }
