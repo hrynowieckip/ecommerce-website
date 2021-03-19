@@ -1,5 +1,6 @@
 package hrynowieckip.ecommercewebsite.data.product;
 
+import hrynowieckip.ecommercewebsite.domain.model.Comment;
 import hrynowieckip.ecommercewebsite.domain.model.ProductImage;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,4 +22,5 @@ public class ProductSummary {
     private BigDecimal price;
 
     private List<ProductImage> photos = new ArrayList<>();
+    private List<Comment> comments = new ArrayList<>();
 }

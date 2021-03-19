@@ -1,15 +1,19 @@
 package hrynowieckip.ecommercewebsite.service;
 
 import hrynowieckip.ecommercewebsite.FileUploadUtil;
+import hrynowieckip.ecommercewebsite.converter.CommentConverter;
 import hrynowieckip.ecommercewebsite.converter.ProductConverter;
 import hrynowieckip.ecommercewebsite.data.product.ProductSummary;
 import hrynowieckip.ecommercewebsite.domain.model.Category;
+import hrynowieckip.ecommercewebsite.domain.model.Comment;
 import hrynowieckip.ecommercewebsite.domain.model.Product;
 import hrynowieckip.ecommercewebsite.domain.model.ProductImage;
 import hrynowieckip.ecommercewebsite.domain.repository.CategoryRepository;
+import hrynowieckip.ecommercewebsite.domain.repository.CommentRepository;
 import hrynowieckip.ecommercewebsite.domain.repository.ProductImageRepository;
 import hrynowieckip.ecommercewebsite.domain.repository.ProductRepository;
 import hrynowieckip.ecommercewebsite.exception.ProductNameAlreadyExists;
+import hrynowieckip.ecommercewebsite.web.command.AddCommentCommand;
 import hrynowieckip.ecommercewebsite.web.command.AddProductCommand;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -34,6 +38,8 @@ public class ProductService {
     private final ProductConverter productConverter;
     private final CategoryRepository categoryRepository;
     private final ProductImageRepository productImageRepository;
+    private final CommentConverter commentConverter;
+    private final CommentRepository commentRepository;
 
     public List<ProductSummary> getAllProductsSummary() {
         log.debug("Getting all products");
@@ -93,5 +99,17 @@ public class ProductService {
         log.debug("Convert product to summary");
         ProductSummary productSummary = productConverter.toProductSummary(product);
         return productSummary;
+    }
+
+    public Long addComment(AddCommentCommand addCommentCommand) {
+        Comment comment = commentConverter.from(addCommentCommand);
+        Product product = productRepository.getByName(addCommentCommand.getProductName());
+
+        comment.setProduct(product);
+        List<Comment> productComments = product.getComments();
+        if (productComments == null) product.setComments(new ArrayList<>());
+        productComments.add(comment);
+        commentRepository.save(comment);
+        return comment.getId();
     }
 }

@@ -109,7 +109,26 @@
                             <section th:text="${product.description}"></section>
                         </div>
                         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
-                        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
+                        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                            <div th:each="comment:${product.getComments()}">
+                                <br>
+                                <a th:text="${comment.getComment()}"></a>
+                                <br>
+                                <span>Author:</span>
+                                <a th:text="${comment.getAuthor()}"></a>
+                            </div>
+
+                            <hr>
+                            <form th:action="@{/product/comment/add}" th:method="post" th:object="${addCommentCommand}">
+                                <label for="fname" >Author:</label><br>
+                                <input hidden="hidden" required name="productName" th:value="${product.name}">
+                                <input type="text" id="fname"  required name="author"><br>
+                                <label for="w3review">Comment:</label><br>
+                                <textarea id="w3review" rows="4" cols="50" required name="comment"></textarea>
+                                <button type="submit"> Add comment  </button>
+                            </form>
+
+                        </div>
                     </div>
 
                 </div>
@@ -118,6 +137,7 @@
     </div>
 </div>
 
+<br><br><br>
 <footer class="footer" th:insert="elements/footer.html :: footer"></footer>
 </body>
 </html>
