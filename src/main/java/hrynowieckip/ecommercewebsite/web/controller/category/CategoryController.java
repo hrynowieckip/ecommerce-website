@@ -10,11 +10,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Set;
 
 @Controller
 @RequiredArgsConstructor
@@ -49,5 +51,15 @@ public class CategoryController {
             bindingResult.rejectValue(null, null, "Problem with adding category");
             return "category/form";
         }
+    }
+
+    @GetMapping("/{name}")
+    public String displayProductsFromCategory(@PathVariable("name") String categoryName, Model model){
+        model.addAttribute("categoryName", categoryName);
+        List<CategorySummary> categorySummaryList = categoryService.getAllCategoriesSummary();
+        model.addAttribute("allCategories", categorySummaryList);
+        Set productsFromCategory = categoryService.getAllProductsFromCategory(categoryName);
+        model.addAttribute("allProducts", productsFromCategory);
+        return "category/products-from-category";
     }
 }
