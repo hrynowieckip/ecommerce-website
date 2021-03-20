@@ -1,14 +1,10 @@
 package hrynowieckip.ecommercewebsite.domain.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "wishlist")
@@ -16,6 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@ToString(exclude = {"user", "products"})
 public class Wishlist {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,5 +20,5 @@ public class Wishlist {
     @OneToOne
     private User user;
     @ManyToMany
-    private List<Product> products = new ArrayList<>();
+    private Set<Product> products = new HashSet<>();
 }
