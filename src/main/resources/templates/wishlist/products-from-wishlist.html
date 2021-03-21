@@ -2,7 +2,8 @@
 <html lang="en" xmlns:th="https://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Home page</title>
+    <title>Wishlist</title>
+    <base href="/">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
             integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
             crossorigin="anonymous"></script>
@@ -19,7 +20,7 @@
           integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 
     <link rel="stylesheet" type="text/css" href="css/elements/footer-style.css">
-    <link rel="stylesheet" type="text/css" href="css/home-page-style.css">
+    <link rel="stylesheet" type="text/css" href="css/category/products-from-category.css">
 </head>
 <body>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
@@ -33,7 +34,7 @@
 
 
 <div class="container">
-    <h3 class="h3">Products</h3>
+    <h3 class="h3 text-center">Wishlist</h3>
     <div class="row">
         <div class="col-md-3 col-sm-6" th:each="product:${allProducts}">
             <div class="product-grid2">
@@ -49,8 +50,7 @@
                     </a>
                     <ul class="social">
                         <li><a href="#" data-tip="Quick View"><i class="fa fa-eye"></i></a></li>
-                        <li><a th:href="@{/wishlist/{name}(name = ${product.name})}" data-tip="Add to Wishlist"><i
-                                class="fa fa-shopping-bag"></i></a></li>
+                        <li><a th:href="@{/wishlist/delete/{name}(name = ${product.name})}" data-tip="Delete from Wishlist"><i class="fa fa-shopping-bag"></i></a></li>
                         <li><a href="#" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
                     </ul>
                     <a class="add-to-cart" href="#">Add to cart</a>

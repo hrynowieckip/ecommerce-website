@@ -33,4 +33,7 @@ public class Product {
 
     @OneToMany(mappedBy = "product")
     private List<Comment> comments=new ArrayList<>();
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    private List<Wishlist> wishlist = new ArrayList<>();
 }
