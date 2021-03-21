@@ -38,4 +38,11 @@ public class WishlistController {
         log.debug("Product added to wishlist, id: {}", id);
         return "redirect:/";
     }
+    @GetMapping("/delete/{name}")
+    public String deleteProductToWishlist(@PathVariable("name") String productName) {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        String productNameDeleted = wishlistService.deleteProductToWishlist(productName, username);
+        log.debug("Product deleted from wishlist: {}", productNameDeleted);
+        return "redirect:/";
+    }
 }

@@ -68,4 +68,20 @@ public class WishlistService {
         Wishlist savedWishlist = wishlistRepository.save(wishlist);
         return savedWishlist.getId();
     }
+
+    public String deleteProductToWishlist(String productName, String username) {
+        log.debug("Product name to delete from user wishlist: {}", productName);
+        User user = userRepository.getByUsername(username);
+        Product product = productRepository.getByName(productName);
+
+        Wishlist wishlist = user.getWishlist();
+        Set<Product> products = wishlist.getProducts();
+        products.remove(product);
+        wishlist.setProducts(products);
+
+        List<Wishlist> productWishlist = product.getWishlist();
+        productWishlist.remove(wishlist);
+        product.setWishlist(productWishlist);
+        return productName;
+    }
 }
