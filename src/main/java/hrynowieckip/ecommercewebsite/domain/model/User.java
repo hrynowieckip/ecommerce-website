@@ -37,4 +37,7 @@ public class User implements Serializable {
 
     @OneToOne
     private Wishlist wishlist;
+
+    @OneToOne
+    private Cart cart;
 }
