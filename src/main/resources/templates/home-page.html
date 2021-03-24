@@ -51,9 +51,9 @@
                         <li><a href="#" data-tip="Quick View"><i class="fa fa-eye"></i></a></li>
                         <li><a th:href="@{/wishlist/{name}(name = ${product.name})}" data-tip="Add to Wishlist"><i
                                 class="fa fa-shopping-bag"></i></a></li>
-                        <li><a href="#" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
+                        <li><a th:href="@{/cart/{name}(name = ${product.name})}" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
                     </ul>
-                    <a class="add-to-cart" href="#">Add to cart</a>
+                    <a class="add-to-cart" th:href="@{/cart/{name}(name = ${product.name})}">Add to cart</a>
                 </div>
                 <div class="product-content">
                     <h3 class="title"><a href="#" th:text="${product.name}">Title</a></h3>
