@@ -69,7 +69,7 @@ public class WishlistService {
         return savedWishlist.getId();
     }
 
-    public String deleteProductToWishlist(String productName, String username) {
+    public String deleteProductFromWishlist(String productName, String username) {
         log.debug("Product name to delete from user wishlist: {}", productName);
         User user = userRepository.getByUsername(username);
         Product product = productRepository.getByName(productName);
