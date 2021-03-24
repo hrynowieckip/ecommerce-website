@@ -15,6 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -31,9 +32,9 @@ public class UserService {
         log.debug("User data to save: {}", registerUserCommand);
 
         User userToCreate = userConverter.from(registerUserCommand);
-        if(userRepository.existsByUsername(userToCreate.getUsername())){
+        if (userRepository.existsByUsername(userToCreate.getUsername())) {
             log.debug("Attempting to register on already existing user");
-            throw  new UserAlreadyExistsException(String.format("User %s already exists", userToCreate.getUsername()));
+            throw new UserAlreadyExistsException(String.format("User %s already exists", userToCreate.getUsername()));
         }
         userToCreate.setActive(Boolean.TRUE);
         userToCreate.setRoles(Set.of("ROLE_USER"));
@@ -55,6 +56,7 @@ public class UserService {
         log.debug("Summary of user data {}", userSummary);
         return userSummary;
     }
+
     public String edit(EditUserCommand editUserCommand) {
         log.debug("Getting current user data");
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -62,5 +64,10 @@ public class UserService {
         log.debug("User data to conversion: {}", editUserCommand);
         User user = userConverter.from(editUserCommand, userToEdit);
         return user.getUsername();
+    }
+
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
+
     }
 }
