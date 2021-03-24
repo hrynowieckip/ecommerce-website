@@ -14,13 +14,13 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @EqualsAndHashCode(of = "name")
-@ToString(exclude = "category")
+@ToString(exclude = {"category", "comments", "wishlist", "photos", "carts"})
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true,nullable = false)
+    @Column(unique = true, nullable = false)
     private String name;
     private String description;
     private BigDecimal price;
@@ -32,8 +32,11 @@ public class Product {
     private List<ProductImage> photos = new ArrayList<>();
 
     @OneToMany(mappedBy = "product")
-    private List<Comment> comments=new ArrayList<>();
+    private List<Comment> comments = new ArrayList<>();
 
     @ManyToMany(cascade = CascadeType.ALL)
     private List<Wishlist> wishlist = new ArrayList<>();
+
+    @ManyToMany
+    private List<Cart> carts = new ArrayList<>();
 }
