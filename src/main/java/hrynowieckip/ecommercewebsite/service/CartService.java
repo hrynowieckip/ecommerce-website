@@ -17,7 +17,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -33,7 +32,13 @@ public class CartService {
     public List<ProductSummary> getAllProductForUserFromCart(String username) {
         User user = userRepository.getByUsername(username);
         Cart cart = cartRepository.getByUser(user);
-        List<Product> products = cart.getProducts();
+        List<Product> products;
+        if (cart == null) {
+            log.debug("Cart is empty");
+            products = new ArrayList<>();
+        } else {
+            products = cart.getProducts();
+        }
         return products.stream()
                 .map(productConverter::toProductSummary)
                 .collect(Collectors.toList());

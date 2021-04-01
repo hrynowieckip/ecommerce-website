@@ -30,7 +30,13 @@ public class WishlistService {
     public Set<ProductSummary> getAllProductForUserFromWishlist(String username) {
         User user = userRepository.getByUsername(username);
         Wishlist wishlist = wishlistRepository.getByUser(user);
-        Set<Product> products = wishlist.getProducts();
+        Set<Product> products;
+        if (wishlist == null) {
+            log.debug("Wishlist is empty");
+            products = new HashSet<>();
+        } else {
+            products = wishlist.getProducts();
+        }
         return products.stream()
                 .map(productConverter::toProductSummary)
                 .collect(Collectors.toSet());
