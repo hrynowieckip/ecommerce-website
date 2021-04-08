@@ -52,13 +52,13 @@
                                         <img class="d-block w-100" style="width:366.5px;height:488.66px;"
                                              th:each="photo,photoStats:${product.photos}"
                                              th:if="${photoStats.index == 0}"
-                                             th:src="@{'/product-images/' + ${product.id} + '/' + ${photo.getPath()}}"
+                                             th:src="'data:image/png;base64,' + ${photo.generateBase64Image()}"
                                              alt="First slide">
                                     </div>
                                     <div class="carousel-item" th:each="photo,photoStats:${product.photos}"
                                          th:if="${photoStats.index > 0}">
                                         <img class="d-block w-100" style="width:366.5px;height:488.66px;"
-                                             th:src="@{'/product-images/' + ${product.id} + '/' + ${photo.getPath()}}"
+                                             th:src="'data:image/png;base64,' + ${photo.generateBase64Image()}"
                                              alt="Second slide">
                                     </div>
                                 </div>

@@ -2,6 +2,7 @@ package hrynowieckip.ecommercewebsite.domain.model;
 
 
 import lombok.*;
+import org.apache.tomcat.util.codec.binary.Base64;
 
 import javax.persistence.*;
 
@@ -16,9 +17,14 @@ public class ProductImage {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = true, length = 64)
-    private String path;
+    @Lob
+    private byte[] image;
 
     @ManyToOne
     private Product product;
+
+    public String generateBase64Image()
+    {
+        return Base64.encodeBase64String(this.getImage());
+    }
 }
