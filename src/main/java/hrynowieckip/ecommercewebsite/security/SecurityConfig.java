@@ -31,22 +31,26 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+                .headers().frameOptions().disable()
+                .and()
                 .authorizeRequests()
 //                .antMatchers("/userlist").hasRole("ADMIN")
 //                .antMatchers("/userlist/*").hasRole("ADMIN")
-                .antMatchers("/categorty").hasRole("ADMIN")
-                .antMatchers("/product/add").hasRole("ADMIN")
-                .antMatchers("/categorty/*").hasRole("ADMIN")
-                .antMatchers("/cart").hasRole("USER")
-                .antMatchers("/cart/*").hasRole("USER")
-                .antMatchers("/wishlist").hasRole("USER")
-                .antMatchers("/wishlist/*").hasRole("USER")
+//                .antMatchers("/categorty").hasRole("ADMIN")
+//                .antMatchers("/product/add").hasRole("ADMIN")
+//                .antMatchers("/categorty/*").hasRole("ADMIN")
+//                .antMatchers("/cart").hasRole("USER")
+//                .antMatchers("/cart/*").hasRole("USER")
+//                .antMatchers("/wishlist").hasRole("USER")
+//                .antMatchers("/wishlist/*").hasRole("USER")
                 .anyRequest().permitAll()
                 .and()
                 .formLogin()
                 .loginPage("/login")
                 .defaultSuccessUrl("/")
                 .and()
-                .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/");
+                .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/")
+        .and()
+        .csrf().disable();
     }
 }
