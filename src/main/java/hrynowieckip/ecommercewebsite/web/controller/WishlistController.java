@@ -21,7 +21,6 @@ import java.util.Set;
 @RequestMapping("/wishlist")
 public class WishlistController {
     private final WishlistService wishlistService;
-    private final UserService userService;
 
     @GetMapping
     public String displayUserWishlist(Model model) {
