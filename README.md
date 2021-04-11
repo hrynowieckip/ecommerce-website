@@ -4,6 +4,15 @@
 
 Ecommerce page created with Java, Spring. It is a simple online store. [See it live on heroku](https://ecommerce-website-hrynowieckip.herokuapp.com)
 
+##### Demo accounts
+* User
+  * Login: user@user
+  * Password: password
+
+* Admin
+  * Login: admin@admin
+  * Password: password
+
 
 ---
 
