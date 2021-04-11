@@ -68,16 +68,14 @@ public class ProductService {
         productRepository.save(productToAdd);
 
         for (MultipartFile file : multipartProductImage) {
-            String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-            String uploadDir = "product-images/" + productToAdd.getId();
+            ProductImage productImage = new ProductImage();
             try {
-                FileUploadUtil.saveFile(uploadDir, fileName, file);
+                 productImage = ProductImage.builder()
+                        .image(file.getBytes())
+                        .build();
             } catch (IOException e) {
                 log.debug("Problem with saving the image");
             }
-            ProductImage productImage = ProductImage.builder()
-                    .path(fileName)
-                    .build();
             productImageRepository.save(productImage);
 
             List<ProductImage> images = productToAdd.getPhotos();
