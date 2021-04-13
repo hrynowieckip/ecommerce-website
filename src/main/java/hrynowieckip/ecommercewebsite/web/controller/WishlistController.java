@@ -1,7 +1,7 @@
 package hrynowieckip.ecommercewebsite.web.controller;
 
 import hrynowieckip.ecommercewebsite.data.product.ProductSummary;
-import hrynowieckip.ecommercewebsite.service.UserService;
+import hrynowieckip.ecommercewebsite.service.APIService;
 import hrynowieckip.ecommercewebsite.service.WishlistService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,12 +21,14 @@ import java.util.Set;
 @RequestMapping("/wishlist")
 public class WishlistController {
     private final WishlistService wishlistService;
+    private final APIService apiService;
 
     @GetMapping
     public String displayUserWishlist(Model model) {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         Set<ProductSummary> allProductForUserFromWishlist = wishlistService.getAllProductForUserFromWishlist(username);
         model.addAttribute("allProducts", allProductForUserFromWishlist);
+        model.addAttribute("tempForCity", apiService.getWeatherForCity());
         return "wishlist/products-from-wishlist";
     }
 
@@ -37,6 +39,7 @@ public class WishlistController {
         log.debug("Product added to wishlist, id: {}", id);
         return "redirect:/";
     }
+
     @GetMapping("/delete/{name}")
     public String deleteProductFromWishlist(@PathVariable("name") String productName) {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
