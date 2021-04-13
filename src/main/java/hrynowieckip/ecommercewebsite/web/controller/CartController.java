@@ -1,11 +1,10 @@
 package hrynowieckip.ecommercewebsite.web.controller;
 
-import hrynowieckip.ecommercewebsite.converter.UserConverter;
 import hrynowieckip.ecommercewebsite.data.product.ProductSummary;
 import hrynowieckip.ecommercewebsite.data.user.UserSummary;
+import hrynowieckip.ecommercewebsite.service.APIService;
 import hrynowieckip.ecommercewebsite.service.CartService;
 import hrynowieckip.ecommercewebsite.service.UserService;
-import hrynowieckip.ecommercewebsite.web.command.EditUserCommand;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -24,6 +23,7 @@ import java.util.List;
 public class CartController {
     private final CartService cartService;
     private final UserService userService;
+    private final APIService apiService;
 
 
     @GetMapping
@@ -31,8 +31,9 @@ public class CartController {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         List<ProductSummary> allProductForUserFromCart = cartService.getAllProductForUserFromCart(username);
         model.addAttribute("allProducts", allProductForUserFromCart);
-        UserSummary userSummary= userService.getCurrentUserSummary();
+        UserSummary userSummary = userService.getCurrentUserSummary();
         model.addAttribute("currentUser", userSummary);
+        model.addAttribute("tempForCity", apiService.getWeatherForCity());
         return "cart/cart-page";
     }
 

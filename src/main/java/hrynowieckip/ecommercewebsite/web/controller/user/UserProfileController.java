@@ -1,6 +1,7 @@
 package hrynowieckip.ecommercewebsite.web.controller.user;
 
 import hrynowieckip.ecommercewebsite.data.user.UserSummary;
+import hrynowieckip.ecommercewebsite.service.APIService;
 import hrynowieckip.ecommercewebsite.service.UserService;
 import hrynowieckip.ecommercewebsite.web.command.EditUserCommand;
 import lombok.RequiredArgsConstructor;
@@ -16,17 +17,20 @@ import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/profile")
-@Slf4j @RequiredArgsConstructor
+@Slf4j
+@RequiredArgsConstructor
 public class UserProfileController {
     private final UserService userService;
+    private final APIService apiService;
 
     @GetMapping
-    public String getProfilePage(Model model){
-        UserSummary userSummary= userService.getCurrentUserSummary();
+    public String getProfilePage(Model model) {
+        UserSummary userSummary = userService.getCurrentUserSummary();
         EditUserCommand editUserCommand = createEditUserCommand(userSummary);
 
         model.addAttribute(userSummary);
         model.addAttribute(editUserCommand);
+        model.addAttribute("tempForCity", apiService.getWeatherForCity());
         return "user/profile";
     }
 
@@ -42,12 +46,12 @@ public class UserProfileController {
     }
 
     @PostMapping("/edit")
-    public String editUserProfile(@Valid EditUserCommand editUserCommand, BindingResult bindingResult){
+    public String editUserProfile(@Valid EditUserCommand editUserCommand, BindingResult bindingResult) {
         log.debug("User data to edit: {}", editUserCommand);
-        try{
+        try {
             String username = userService.edit(editUserCommand);
             log.debug("User successfully edited, username = {}", username);
-        }catch (RuntimeException re){
+        } catch (RuntimeException re) {
             log.debug("Error while editing data", re);
             bindingResult.rejectValue(null, null, "Something went wrong");
             return "/profile/edit";

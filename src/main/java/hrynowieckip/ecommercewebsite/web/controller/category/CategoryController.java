@@ -2,6 +2,7 @@ package hrynowieckip.ecommercewebsite.web.controller.category;
 
 import hrynowieckip.ecommercewebsite.data.category.CategorySummary;
 import hrynowieckip.ecommercewebsite.exception.CategoryNameAlreadyExistsException;
+import hrynowieckip.ecommercewebsite.service.APIService;
 import hrynowieckip.ecommercewebsite.service.CategoryService;
 import hrynowieckip.ecommercewebsite.web.command.AddCategoryCommand;
 import lombok.RequiredArgsConstructor;
@@ -24,12 +25,14 @@ import java.util.Set;
 @RequestMapping("/category")
 public class CategoryController {
     private final CategoryService categoryService;
+    private final APIService apiService;
 
     @GetMapping
     private String getCategories(Model model) {
         List<CategorySummary> categorySummaryList = categoryService.getAllCategoriesSummary();
         model.addAttribute("allCategories", categorySummaryList);
         model.addAttribute(new AddCategoryCommand());
+        model.addAttribute("tempForCity", apiService.getWeatherForCity());
         return "category/form";
     }
 
@@ -54,12 +57,14 @@ public class CategoryController {
     }
 
     @GetMapping("/{name}")
-    public String displayProductsFromCategory(@PathVariable("name") String categoryName, Model model){
+    public String displayProductsFromCategory(@PathVariable("name") String categoryName, Model model) {
         model.addAttribute("categoryName", categoryName);
         List<CategorySummary> categorySummaryList = categoryService.getAllCategoriesSummary();
         model.addAttribute("allCategories", categorySummaryList);
         Set productsFromCategory = categoryService.getAllProductsFromCategory(categoryName);
         model.addAttribute("allProducts", productsFromCategory);
+
+        model.addAttribute("tempForCity", apiService.getWeatherForCity());
         return "category/products-from-category";
     }
 }

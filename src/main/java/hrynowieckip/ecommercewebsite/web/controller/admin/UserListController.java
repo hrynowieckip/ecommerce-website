@@ -2,6 +2,7 @@ package hrynowieckip.ecommercewebsite.web.controller.admin;
 
 
 import hrynowieckip.ecommercewebsite.domain.model.User;
+import hrynowieckip.ecommercewebsite.service.APIService;
 import hrynowieckip.ecommercewebsite.service.AdminService;
 import hrynowieckip.ecommercewebsite.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -22,12 +23,14 @@ import java.util.List;
 public class UserListController {
     private final UserService userService;
     private final AdminService adminService;
+    private final APIService apiService;
 
     @GetMapping
     public String displayAllUsers(Model model) {
         log.debug("Getting all users");
         List<User> users = userService.getAllUsers();
         model.addAttribute("allUsers", users);
+        model.addAttribute("tempForCity", apiService.getWeatherForCity());
         return "admin/user-list";
     }
 
