@@ -2,6 +2,7 @@ package hrynowieckip.ecommercewebsite.web.controller.product;
 
 import hrynowieckip.ecommercewebsite.data.product.ProductSummary;
 import hrynowieckip.ecommercewebsite.exception.ProductNameAlreadyExists;
+import hrynowieckip.ecommercewebsite.service.APIService;
 import hrynowieckip.ecommercewebsite.service.CategoryService;
 import hrynowieckip.ecommercewebsite.service.ProductService;
 import hrynowieckip.ecommercewebsite.web.command.AddCommentCommand;
@@ -24,6 +25,7 @@ import java.util.List;
 public class ProductController {
     private final ProductService productService;
     private final CategoryService categoryService;
+    private final APIService apiService;
 
     @GetMapping("/{name}")
     public String getProductPage(@PathVariable("name") String name, Model model) {
@@ -40,6 +42,7 @@ public class ProductController {
         model.addAttribute("allProducts", allProducts);
         model.addAttribute(new AddProductCommand());
         model.addAttribute("allCategories", categoryService.getAllCategoriesSummary());
+        model.addAttribute("tempForCity", apiService.getWeatherForCity());
         return "product/form";
     }
 

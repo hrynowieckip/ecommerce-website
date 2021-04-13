@@ -1,7 +1,7 @@
 package hrynowieckip.ecommercewebsite.web.controller;
 
 
-import hrynowieckip.ecommercewebsite.domain.repository.ProductRepository;
+import hrynowieckip.ecommercewebsite.service.APIService;
 import hrynowieckip.ecommercewebsite.service.CategoryService;
 import hrynowieckip.ecommercewebsite.service.ProductService;
 import lombok.RequiredArgsConstructor;
@@ -16,11 +16,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class HomePageController {
     private final CategoryService categoryService;
     private final ProductService productService;
-    private final ProductRepository productRepository;
+    private final APIService apiService;
+
     @GetMapping
-    public String getTest(Model model){
+    public String getTest(Model model) {
         model.addAttribute("allCategories", categoryService.getAllCategoriesSummary());
         model.addAttribute("allProducts", productService.getAllProductsSummary());
+        model.addAttribute("tempForCity", apiService.getWeatherForCity());
         return "home-page";
     }
 }
