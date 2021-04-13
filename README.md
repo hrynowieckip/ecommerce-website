@@ -41,6 +41,7 @@ Project is created with:
 * Adding a product to your wish list
 * Viewing product comments
 * Adding comments to the product
+* Weather for the user's city (API)
 * Adding a product with photos (admin)
 * Creating new categories (admin)
 * Displaying all users (admin)
@@ -53,7 +54,6 @@ Project is created with:
 
 ##### Planned changes:
 * searching for a product by name
-* weather for the user's city
 * tracking cart button
 * registration via email
 * order management -admin
