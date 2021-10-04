@@ -49,6 +49,8 @@ class AdminServiceTest {
         Long result = adminService.addAdminRoleToUser("user@user");
 
         //Then
+        assertThat(user.getRoles())
+                .contains("ROLE_ADMIN");
         assertThat(result)
                 .isNotNull()
                 .isPositive()
