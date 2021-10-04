@@ -58,4 +58,40 @@ class AdminServiceTest {
 
     }
 
+    @Test
+    public void deleteOrMakeSureThatUserDontHaveAdminRoleTest() {
+        //Given
+        long userId = 11L;
+        UserDetails userDetails = UserDetails.builder()
+                .firstName("Tom")
+                .lastName("Nowak")
+                .address("Address")
+                .zipCode("00000")
+                .city("City")
+                .phoneNumber("000000000")
+                .build();
+        User user = User.builder()
+                .id(11L)
+                .username("user@user")
+                .password("pass")
+                .roles(new HashSet<>(Arrays.asList("ROLE_USER", "ROLE_ADMIN")))
+                .userDetails(userDetails)
+                .build();
+
+        //When
+        Mockito.when(userRepository.getByUsername("user@user")).thenReturn(user);
+
+        Long result = adminService.deleteOrMakeSureThatUserDontHaveAdminRole("user@user");
+
+        //Then
+        assertThat(user.getRoles())
+                .contains("ROLE_USER")
+                .doesNotContain("ROLE_ADMIN");
+        assertThat(result)
+                .isNotNull()
+                .isPositive()
+                .isEqualTo(userId);
+
+    }
+
 }
