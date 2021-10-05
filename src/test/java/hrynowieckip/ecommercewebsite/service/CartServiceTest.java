@@ -15,6 +15,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -71,6 +72,48 @@ class CartServiceTest {
                 .isNotNull()
                 .isEqualTo(resultProductList);
 
+    }
+
+    @Test
+    public void addProductToCart() {
+        //Given
+        String productName = "product";
+        String userName= "user@user";
+        Long cartId =11L;
+
+        List<Product> productList = new ArrayList<>();
+        productList.add(Product.builder().name("ProductInList1").build());
+        productList.add(Product.builder().name("ProductInList2").build());
+
+        User userBuild = User.builder()
+                .username(userName)
+                .cart(Cart.builder()
+                        .id(cartId)
+                        .products(productList)
+                        .build())
+                .build();
+
+        Product productBuild = Product.builder()
+                .name(productName)
+                .build();
+
+        List<Product> resultList = new ArrayList<>();
+        resultList.add(Product.builder().name("ProductInList1").build());
+        resultList.add(Product.builder().name("ProductInList2").build());
+        resultList.add(productBuild);
+        //When
+        Mockito.when(userRepository.getByUsername(userName)).thenReturn(userBuild);
+        Mockito.when(productRepository.getByName(productName)).thenReturn(productBuild);
+        Mockito.when(cartRepository.save(userBuild.getCart())).thenReturn(userBuild.getCart());
+        Long resultId = cartService.addProductToCart(productName, userName);
+        //Then
+        assertThat(resultId)
+                .isPositive()
+                .isNotNull()
+                .isEqualTo(cartId);
+
+        assertThat(userBuild.getCart().getProducts())
+                .isEqualTo(resultList);
     }
 
 }
