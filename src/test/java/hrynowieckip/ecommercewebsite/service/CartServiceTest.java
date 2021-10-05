@@ -75,7 +75,7 @@ class CartServiceTest {
     }
 
     @Test
-    public void addProductToCart() {
+    public void addProductToCartTest() {
         //Given
         String productName = "product";
         String userName= "user@user";
