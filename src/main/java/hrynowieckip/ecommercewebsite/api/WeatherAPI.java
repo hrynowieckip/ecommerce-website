@@ -21,7 +21,7 @@ public class WeatherAPI {
 
         try {
             Response response = client.newCall(request).execute();
-            return response.body().string();
+            if (response.code() == 200) return response.body().string();
         } catch (IOException e) {
             e.printStackTrace();
         }
