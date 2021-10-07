@@ -29,7 +29,10 @@ public class APIService {
         }
         log.debug("Getting weather for city: {}", userCity);
         String weatherForCity = weatherAPI.getWeatherForCity(userCity);
-        if (weatherForCity.isEmpty()) log.debug("Something went wrong with the weather api for city: {}", userCity);
+        if (weatherForCity.isEmpty()) {
+            log.debug("Something went wrong with the weather api for city: {}", userCity);
+            return userCity + "_err";
+        }
 
         int strStart = weatherForCity.indexOf("\"temp\":");
         int strEnd = weatherForCity.indexOf(",\"feels_like\"");
