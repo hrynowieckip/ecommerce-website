@@ -2,13 +2,12 @@ package hrynowieckip.ecommercewebsite.service;
 
 import hrynowieckip.ecommercewebsite.converter.CategoryConverter;
 import hrynowieckip.ecommercewebsite.converter.ProductConverter;
-import hrynowieckip.ecommercewebsite.data.category.CategorySummary;
-import hrynowieckip.ecommercewebsite.data.product.ProductSummary;
+import hrynowieckip.ecommercewebsite.domain.dto.CategorySummary;
 import hrynowieckip.ecommercewebsite.domain.model.Category;
 import hrynowieckip.ecommercewebsite.domain.model.Product;
 import hrynowieckip.ecommercewebsite.domain.repository.CategoryRepository;
 import hrynowieckip.ecommercewebsite.exception.CategoryNameAlreadyExistsException;
-import hrynowieckip.ecommercewebsite.web.command.AddCategoryCommand;
+import hrynowieckip.ecommercewebsite.domain.dto.AddCategoryCommand;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

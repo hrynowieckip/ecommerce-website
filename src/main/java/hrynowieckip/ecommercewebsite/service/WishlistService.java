@@ -1,7 +1,7 @@
 package hrynowieckip.ecommercewebsite.service;
 
 import hrynowieckip.ecommercewebsite.converter.ProductConverter;
-import hrynowieckip.ecommercewebsite.data.product.ProductSummary;
+import hrynowieckip.ecommercewebsite.domain.dto.ProductSummary;
 import hrynowieckip.ecommercewebsite.domain.model.Product;
 import hrynowieckip.ecommercewebsite.domain.model.User;
 import hrynowieckip.ecommercewebsite.domain.model.Wishlist;
@@ -12,7 +12,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
+import jakarta.transaction.Transactional;
 import java.util.*;
 import java.util.stream.Collectors;
 

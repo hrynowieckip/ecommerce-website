@@ -1,8 +1,8 @@
 package hrynowieckip.ecommercewebsite.converter;
 
-import hrynowieckip.ecommercewebsite.data.category.CategorySummary;
+import hrynowieckip.ecommercewebsite.domain.dto.CategorySummary;
 import hrynowieckip.ecommercewebsite.domain.model.Category;
-import hrynowieckip.ecommercewebsite.web.command.AddCategoryCommand;
+import hrynowieckip.ecommercewebsite.domain.dto.AddCategoryCommand;
 import org.springframework.stereotype.Component;
 
 @Component

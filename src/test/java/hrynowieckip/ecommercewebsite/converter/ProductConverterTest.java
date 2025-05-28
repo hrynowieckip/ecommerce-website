@@ -1,8 +1,8 @@
 package hrynowieckip.ecommercewebsite.converter;
 
-import hrynowieckip.ecommercewebsite.data.product.ProductSummary;
+import hrynowieckip.ecommercewebsite.domain.dto.ProductSummary;
 import hrynowieckip.ecommercewebsite.domain.model.Product;
-import hrynowieckip.ecommercewebsite.web.command.AddProductCommand;
+import hrynowieckip.ecommercewebsite.domain.dto.AddProductCommand;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

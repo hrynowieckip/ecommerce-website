@@ -1,7 +1,7 @@
 package hrynowieckip.ecommercewebsite.converter;
 
 import hrynowieckip.ecommercewebsite.domain.model.Comment;
-import hrynowieckip.ecommercewebsite.web.command.AddCommentCommand;
+import hrynowieckip.ecommercewebsite.domain.dto.AddCommentCommand;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

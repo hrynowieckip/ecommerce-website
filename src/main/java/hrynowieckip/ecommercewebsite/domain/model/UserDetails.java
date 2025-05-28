@@ -2,7 +2,7 @@ package hrynowieckip.ecommercewebsite.domain.model;
 
 import lombok.*;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name="users_details")

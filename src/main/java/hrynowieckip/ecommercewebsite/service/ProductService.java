@@ -1,9 +1,8 @@
 package hrynowieckip.ecommercewebsite.service;
 
-import hrynowieckip.ecommercewebsite.FileUploadUtil;
 import hrynowieckip.ecommercewebsite.converter.CommentConverter;
 import hrynowieckip.ecommercewebsite.converter.ProductConverter;
-import hrynowieckip.ecommercewebsite.data.product.ProductSummary;
+import hrynowieckip.ecommercewebsite.domain.dto.ProductSummary;
 import hrynowieckip.ecommercewebsite.domain.model.Category;
 import hrynowieckip.ecommercewebsite.domain.model.Comment;
 import hrynowieckip.ecommercewebsite.domain.model.Product;
@@ -13,13 +12,12 @@ import hrynowieckip.ecommercewebsite.domain.repository.CommentRepository;
 import hrynowieckip.ecommercewebsite.domain.repository.ProductImageRepository;
 import hrynowieckip.ecommercewebsite.domain.repository.ProductRepository;
 import hrynowieckip.ecommercewebsite.exception.ProductNameAlreadyExists;
-import hrynowieckip.ecommercewebsite.web.command.AddCommentCommand;
-import hrynowieckip.ecommercewebsite.web.command.AddProductCommand;
+import hrynowieckip.ecommercewebsite.domain.dto.AddCommentCommand;
+import hrynowieckip.ecommercewebsite.domain.dto.AddProductCommand;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;

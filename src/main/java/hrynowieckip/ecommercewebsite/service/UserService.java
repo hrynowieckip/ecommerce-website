@@ -1,13 +1,13 @@
 package hrynowieckip.ecommercewebsite.service;
 
 import hrynowieckip.ecommercewebsite.converter.UserConverter;
-import hrynowieckip.ecommercewebsite.data.user.UserSummary;
+import hrynowieckip.ecommercewebsite.domain.dto.UserSummary;
 import hrynowieckip.ecommercewebsite.domain.model.User;
 import hrynowieckip.ecommercewebsite.domain.model.UserDetails;
 import hrynowieckip.ecommercewebsite.domain.repository.UserRepository;
 import hrynowieckip.ecommercewebsite.exception.UserAlreadyExistsException;
-import hrynowieckip.ecommercewebsite.web.command.EditUserCommand;
-import hrynowieckip.ecommercewebsite.web.command.RegisterUserCommand;
+import hrynowieckip.ecommercewebsite.domain.dto.EditUserCommand;
+import hrynowieckip.ecommercewebsite.domain.dto.RegisterUserCommand;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.context.SecurityContextHolder;
