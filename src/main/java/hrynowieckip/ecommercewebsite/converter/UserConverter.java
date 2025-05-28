@@ -1,10 +1,10 @@
 package hrynowieckip.ecommercewebsite.converter;
 
-import hrynowieckip.ecommercewebsite.data.user.UserSummary;
+import hrynowieckip.ecommercewebsite.domain.dto.UserSummary;
 import hrynowieckip.ecommercewebsite.domain.model.User;
 import hrynowieckip.ecommercewebsite.domain.model.UserDetails;
-import hrynowieckip.ecommercewebsite.web.command.EditUserCommand;
-import hrynowieckip.ecommercewebsite.web.command.RegisterUserCommand;
+import hrynowieckip.ecommercewebsite.domain.dto.EditUserCommand;
+import hrynowieckip.ecommercewebsite.domain.dto.RegisterUserCommand;
 import org.springframework.stereotype.Component;
 
 @Component

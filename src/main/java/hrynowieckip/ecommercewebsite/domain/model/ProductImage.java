@@ -4,7 +4,7 @@ package hrynowieckip.ecommercewebsite.domain.model;
 import lombok.*;
 import org.apache.tomcat.util.codec.binary.Base64;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
 @Data

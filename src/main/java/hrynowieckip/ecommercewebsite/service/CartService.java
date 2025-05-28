@@ -2,7 +2,7 @@ package hrynowieckip.ecommercewebsite.service;
 
 
 import hrynowieckip.ecommercewebsite.converter.ProductConverter;
-import hrynowieckip.ecommercewebsite.data.product.ProductSummary;
+import hrynowieckip.ecommercewebsite.domain.dto.ProductSummary;
 import hrynowieckip.ecommercewebsite.domain.model.Cart;
 import hrynowieckip.ecommercewebsite.domain.model.Product;
 import hrynowieckip.ecommercewebsite.domain.model.User;
