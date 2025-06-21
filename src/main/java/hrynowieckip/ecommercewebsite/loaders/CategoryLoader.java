@@ -20,12 +20,12 @@ public class CategoryLoader implements DataLoader {
 
     @Transactional
     public void loadData() {
-        Category category = Category.builder()
-                .name("Other")
-                .build();
-
-        categoryRepository.save(category);
-        log.debug("Saved category: {}", category);
+//        Category category = Category.builder()
+//                .name("Other")
+//                .build();
+//
+//        categoryRepository.save(category);
+//        log.debug("Saved category: {}", category);
 
     }
 }
